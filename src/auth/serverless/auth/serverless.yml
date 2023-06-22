@@ -1,0 +1,53 @@
+
+service: ${file(./config.json):deployment.serviceName}
+
+
+provider:
+  name: aws
+  profile: default
+  runtime: nodejs14.x
+  region: ${file(./config.json):deployment.region}
+
+  # Defines permission policy for the Lambda functions.
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+    - Effect: Allow
+      Action:
+        - iot:AttachPrincipalPolicy
+        - iot:DetachPrincipalPolicy
+        - iot:CreatePolicy
+      Resource:
+        - "*"
+
+resources:
+  Resources:
+    UserPool:
+      Type: "AWS::Cognito::UserPool"
+      Properties:
+        UserPoolName: iot_chat_api_user_pool
+        AutoVerifiedAttributes:
+          - email
+        MfaConfiguration: OFF
+        Schema:
+          - AttributeDataType: String
+            Name: email
+            Required: true
+
+
+
+    
+  Outputs:
+    UserPoolId:
+      Description: "The ID of the user pool that is created."
+      Value:
+        Ref: UserPool
+
+

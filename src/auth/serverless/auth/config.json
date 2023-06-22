@@ -1,0 +1,12 @@
+{
+    "deployment": {
+        "region": "eu-north-1",
+        "serviceName": "auth",
+        "userPoolName": "userpool",
+        "clientName": "sniwas",
+        "clientId": "3qongtbuiqpd96smu26m6mrrth",
+        "userPoolId": "eu-north-1_61brEmUEd",
+        "identityPoolID": "eu-north-1:4e05aa52-6727-4032-9652-6f06f7782a3b",
+        "identityPoolName": "MyIdentitypool"
+    }
+}
