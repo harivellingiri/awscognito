@@ -27,7 +27,6 @@ export class AuthService {
 
     async registerUser(authRegisterUserDto: register) {
         const { name, email, password, } = authRegisterUserDto;
-        console.log(this.userPool)
         return new Promise((resolve, reject) => {
             this.userPool.signUp(
                 email,
